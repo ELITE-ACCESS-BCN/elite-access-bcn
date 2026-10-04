@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101923"/><stop offset="1" stop-color="#05080c"/></linearGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4d27b"/><stop offset="1" stop-color="#b77b21"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity=".35"/></filter>
+</defs>
+<rect width="1200" height="760" fill="url(#bg)"/>
+<circle cx="1030" cy="80" r="190" fill="#d7a43b" opacity=".07"/>
+<circle cx="980" cy="690" r="260" fill="#d7a43b" opacity=".04"/>
+<rect x="100" y="170" width="1000" height="430" rx="34" fill="#18232e" stroke="#344352" stroke-width="3"/>
+<rect x="170" y="230" width="260" height="300" rx="20" fill="#0a1118" stroke="#c69a3d" stroke-width="4"/>
+<rect x="770" y="230" width="260" height="300" rx="20" fill="#0a1118" stroke="#c69a3d" stroke-width="4"/>
+<circle cx="600" cy="330" r="78" fill="#0b1219" stroke="url(#gold)" stroke-width="8"/>
+<path d="M560 330h80M600 290v80" stroke="#f1cc72" stroke-width="8" stroke-linecap="round"/>
+<path d="M450 430h300" stroke="#526171" stroke-width="8" stroke-linecap="round"/>
+
+<rect x="70" y="55" width="310" height="42" rx="21" fill="#0a1118" stroke="#6d562b"/>
+<text x="225" y="84" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" letter-spacing="3" fill="#f1cc72">ELITE ACCESS BCN</text>
+<text x="70" y="680" font-family="Arial,sans-serif" font-size="44" font-weight="800" fill="#fff">CONTROL DE ACCESOS</text>
+<text x="70" y="720" font-family="Arial,sans-serif" font-size="22" fill="#aeb8c2">Presencia, orientación y control operativo</text>
+</svg>
