@@ -1,0 +1,20 @@
+ELITE ACCESS BCN — WEB TODO EN UNO
+
+Sube SOLO index.html a la raíz del repositorio de GitHub Pages.
+No necesita carpetas, CSS, JS ni imágenes externas: todo está integrado en el propio HTML.
+
+Incluye:
+- Logo oficial proporcionado por el cliente.
+- Cobertura en toda Catalunya.
+- Menú móvil funcional.
+- Servicios completos.
+- Desokupación y recuperación legal.
+- Email: eliteaccessbcn@gmail.com
+- Teléfono/WhatsApp: +34 644 151 646
+- Formulario de contacto por email.
+- Visualizaciones ilustrativas de servicios.
+- Diseño responsive.
+
+IMPORTANTE:
+Las imágenes de servicios son visualizaciones ilustrativas, no fotografías reales de trabajos realizados.
+No se han inventado datos fiscales o registrales de la empresa. Antes de la publicación comercial definitiva, completa los datos legales de la sociedad cuando estén disponibles.
