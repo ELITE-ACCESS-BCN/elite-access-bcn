@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 210" aria-label="ELITE ACCESS BCN">
+<defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#f1cc72"/><stop offset="1" stop-color="#c9952f"/></linearGradient></defs>
+<path d="M90 8 L158 30 V98 C158 147 128 178 90 199 C52 178 22 147 22 98 V30 Z" fill="none" stroke="url(#g)" stroke-width="7"/>
+<path d="M90 24 L143 41 V96 C143 133 121 157 90 176 C59 157 37 133 37 96 V41 Z" fill="#0b1117" stroke="#5e4a26" stroke-width="2"/>
+<text x="90" y="108" text-anchor="middle" fill="#f1cc72" font-size="42" font-weight="900" font-family="Arial">EA</text>
+<path d="M68 53 L74 38 L90 31 L106 38 L112 53" fill="none" stroke="#f1cc72" stroke-width="4"/>
+</svg>
