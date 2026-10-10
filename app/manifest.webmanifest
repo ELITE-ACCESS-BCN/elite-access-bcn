@@ -1,0 +1,10 @@
+{
+  "name": "ELITE ACCESS BCN · Operaciones",
+  "short_name": "Elite Access",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b0c0e",
+  "theme_color": "#111111",
+  "description": "Partes de incidencia, fichajes, rondas GPS, servicios y personal."
+}
