@@ -94,6 +94,8 @@ drop policy if exists eabcn_round_admin_update on public.eabcn_rounds;
 create policy eabcn_round_admin_update on public.eabcn_rounds for update to authenticated using (public.eabcn_is_admin()) with check (public.eabcn_is_admin());
 drop policy if exists eabcn_round_admin_delete on public.eabcn_rounds;
 create policy eabcn_round_admin_delete on public.eabcn_rounds for delete to authenticated using (public.eabcn_is_admin());
+drop policy if exists eabcn_site_member_read on public.eabcn_sites;
+create policy eabcn_site_member_read on public.eabcn_sites for select to authenticated using (public.eabcn_is_member());
 drop policy if exists eabcn_site_admin on public.eabcn_sites;
 create policy eabcn_site_admin on public.eabcn_sites for all to authenticated using (public.eabcn_is_admin()) with check (public.eabcn_is_admin());
 drop policy if exists eabcn_staff_admin on public.eabcn_staff;
