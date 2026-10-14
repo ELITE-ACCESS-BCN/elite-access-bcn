@@ -1,37 +1,255 @@
+
 <!doctype html>
-<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#111"><title>ELITE ACCESS BCN</title>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>ELITE ACCESS BCN | Operaciones</title>
 <style>
-:root{--g:#d6b15e;--p:#17191d;--b:#0b0c0e;--m:#a9adb5}*{box-sizing:border-box}body{margin:0;background:var(--b);color:#f5f5f2;font:15px system-ui;padding:14px}.wrap{max-width:960px;margin:auto}.card{background:var(--p);border:1px solid #343840;border-radius:13px;padding:15px;margin:12px 0}.head{display:flex;gap:12px;align-items:center;border-bottom:1px solid #333;padding:10px 0 18px}.logo{border:2px solid var(--g);color:var(--g);font-weight:900;padding:12px;border-radius:10px}.muted{color:var(--m)}input,textarea,select,button{font:inherit;border-radius:8px;padding:11px;width:100%;margin:5px 0}input,textarea,select{background:#0e1013;color:white;border:1px solid #444}button{border:0;background:var(--g);font-weight:bold;cursor:pointer}.secondary{background:#292d33;color:white}.danger{background:#633;color:white}.hidden{display:none!important}.nav{display:flex;gap:6px;overflow:auto}.nav button{min-width:max-content;width:auto;background:#292d33;color:white}.nav button.active{background:var(--g);color:#111}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px}.stat{font-size:28px;color:var(--g);font-weight:bold}.item{padding:12px;border:1px solid #393d45;border-radius:9px;margin:8px 0;overflow-wrap:anywhere}.error{color:#ff9999}.ok{color:#8be0aa}label{font-size:12px;font-weight:bold;display:block;margin-top:8px}.notice{background:#292515;border:1px solid #66552a;padding:10px;border-radius:9px;font-size:12px;color:#f1d991}.status{padding:8px 0;overflow-wrap:anywhere}
-</style></head><body><main class="wrap">
-<div id="login"><header class="head"><div class="logo">EA</div><div><b>ELITE ACCESS BCN</b><div class="muted">Acceso privado de empresa</div></div></header><section class="card"><h2>Iniciar sesión</h2><p class="muted">Solo entran las cuentas autorizadas.</p><form id="loginForm"><label>Correo electrónico</label><input id="email" type="email" autocomplete="username" required><label>Contraseña</label><input id="password" type="password" autocomplete="current-password" required><button id="loginBtn">Entrar</button></form><p id="loginMsg" class="muted"></p><small class="muted">El administrador debe crear y autorizar cada cuenta.</small></section></div>
-<div id="app" class="hidden"><header class="head"><div class="logo">EA</div><div style="flex:1"><b>ELITE ACCESS BCN</b><div class="muted">Operaciones compartidas</div></div><button id="logout" class="secondary" style="width:auto">Salir</button></header><p id="who" class="muted"></p><p id="sync" class="status muted">Conectando…</p>
-<nav class="nav"><button class="active" data-tab="home">Inicio</button><button data-tab="inc">Incidencias</button><button data-tab="clock">Fichaje</button><button data-tab="round">Rondas GPS</button><button data-tab="sites">Servicios</button><button data-tab="staff">Personal</button><button data-tab="reports">Informes</button></nav>
-<section id="home" class="tab"><div class="card"><p style="color:var(--g)">CENTRO DE OPERACIONES</p><h2>Control profesional. Servicio excelente.</h2><p class="muted">Los registros se guardan en la base de datos compartida.</p></div><div class="grid"><div class="card">Incidencias<div id="nInc" class="stat">0</div></div><div class="card">Fichajes<div id="nClock" class="stat">0</div></div><div class="card">Servicios<div id="nSites" class="stat">0</div></div><div class="card">Personal<div id="nStaff" class="stat">0</div></div></div><div class="notice">Prueba primero con datos ficticios. El GPS solo se registra al pulsar el botón y conceder permiso.</div></section>
-<section id="inc" class="tab hidden"><h2>Parte de incidencia</h2><form id="if" class="card"><label>Fecha y hora</label><input id="idate" type="datetime-local" required><label>Servicio / ubicación</label><input id="isite" required><label>Tipo</label><select id="itype"><option>Acceso denegado</option><option>Conflicto verbal</option><option>Alteración del orden</option><option>Emergencia médica</option><option>Daño material</option><option>Riesgo / anomalía</option><option>Entrega de turno</option><option>Otro</option></select><label>Prioridad</label><select id="ipri"><option>Normal</option><option>Alta</option><option>Urgente</option></select><label>Empleado</label><input id="istaff" required><label>Descripción objetiva</label><textarea id="ifacts" required></textarea><label>Actuación realizada</label><textarea id="iaction"></textarea><button>Guardar parte</button></form><div id="il"></div></section>
-<section id="clock" class="tab hidden"><h2>Fichaje</h2><div class="card"><label>Empleado</label><input id="cstaff"><label>Servicio</label><input id="csite"><label>Observaciones</label><input id="cnote"><div class="grid"><button id="cin" type="button">Registrar entrada</button><button id="cout" class="secondary" type="button">Registrar salida</button></div></div><div id="cl"></div></section>
-<section id="round" class="tab hidden"><h2>Rondas GPS</h2><div class="card"><label>Empleado</label><input id="rstaff"><label>Servicio</label><input id="rsite"><label>Punto de control / observaciones</label><input id="rnote"><button id="rbtn" type="button">Registrar punto GPS</button><p class="muted">Requiere permiso de ubicación. No rastrea en segundo plano.</p></div><div id="rl"></div></section>
-<section id="sites" class="tab hidden"><h2>Servicios y clientes</h2><form id="sf" class="card"><label>Nombre del servicio</label><input id="sname" required><label>Dirección</label><input id="saddr"><label>Contacto / teléfono de trabajo</label><input id="scontact"><label>Tipo</label><select id="skind"><option>Control de acceso</option><option>Servicios auxiliares</option><option>Conserjería / recepción</option><option>Rondas</option><option>Otro</option></select><button>Guardar servicio</button></form><div id="sl"></div></section>
-<section id="staff" class="tab hidden"><h2>Personal</h2><form id="pf" class="card"><label>Nombre y apellidos</label><input id="pname" required><label>Rol</label><select id="prole"><option>Auxiliar de servicios</option><option>Controlador de acceso habilitado</option><option>Coordinación</option><option>Administración</option><option>Vigilante de seguridad habilitado</option></select><button>Añadir empleado</button></form><div id="pl"></div></section>
-<section id="reports" class="tab hidden"><h2>Informes y datos</h2><div class="card"><button id="export" type="button">Descargar copia JSON</button><p class="muted">Crea usuarios en Supabase Authentication y autorízalos en company_members con su UID y rol. Nunca compartas una clave service_role.</p></div></section><p class="muted">ELITE ACCESS BCN · Respeta la protección de datos y los protocolos legales.</p></div></main>
-<script src="./config.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-(()=>{'use strict';const $=id=>document.getElementById(id);const empty=()=>({incidents:[],clocks:[],rounds:[],sites:[],staff:[]});let sb,user,role,state=empty(),channel,queue=Promise.resolve();
-const say=(s,e=false)=>{$('loginMsg').textContent=s;$('loginMsg').className=e?'error':'muted'},uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])),fmt=d=>{try{return new Date(d).toLocaleString('es-ES')}catch{return d||''}},now=()=>{let d=new Date();return new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
-function sync(s,k='muted'){$('sync').textContent=s;$('sync').className='status '+k}
-function tab(id){document.querySelectorAll('.tab').forEach(e=>e.classList.add('hidden'));$(id).classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.tab===id))}document.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
-function normalize(v){let s=empty();if(v&&typeof v==='object')Object.keys(s).forEach(k=>{if(Array.isArray(v[k]))s[k]=v[k]});return s}
-function list(id,a,title,sub,group){let el=$(id);el.innerHTML=a.map(x=>`<div class="item"><b>${esc(title(x))}</b><div class="muted">${esc(sub(x))}</div>${x.facts?'<p>'+esc(x.facts)+'</p>':''}<button class="danger" data-del="${group}:${esc(x.id)}" type="button">Eliminar</button></div>`).join('')||'<div class="item muted">Todavía no hay registros.</div>';el.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar este registro compartido?')){let [g,i]=b.dataset.del.split(':');state[g]=state[g].filter(x=>x.id!==i);save()}})}
-function render(){$('nInc').textContent=state.incidents.length;$('nClock').textContent=state.clocks.length;$('nSites').textContent=state.sites.length;$('nStaff').textContent=state.staff.length;list('il',state.incidents,x=>x.type+' · '+x.site,x=>fmt(x.date)+' · '+x.staff+' · '+x.priority,'incidents');list('cl',state.clocks,x=>x.type+' · '+x.staff,x=>fmt(x.time)+' · '+x.site,'clocks');list('rl',state.rounds,x=>x.staff+' · '+x.site,x=>fmt(x.time)+(Number.isFinite(x.lat)?' · '+x.lat.toFixed(5)+','+x.lon.toFixed(5):''),'rounds');list('sl',state.sites,x=>x.name,x=>x.kind+' · '+x.address+' · '+x.contact,'sites');list('pl',state.staff,x=>x.name,x=>x.role,'staff')}
-async function load(){sync('Cargando datos…');let {data,error}=await sb.from('app_state').select('data').eq('id','main').maybeSingle();if(error)throw error;if(data){state=normalize(data.data)}else{let r=await sb.from('app_state').insert({id:'main',data:state,updated_by:user.id});if(r.error&&r.error.code==='23505'){let q=await sb.from('app_state').select('data').eq('id','main').single();if(q.error)throw q.error;state=normalize(q.data.data)}else if(r.error)throw r.error}render();sync('Sincronizado · datos compartidos','ok');if(channel)sb.removeChannel(channel);channel=sb.channel('eabcn-state').on('postgres_changes',{event:'UPDATE',schema:'public',table:'app_state',filter:'id=eq.main'},p=>{if(p.new&&p.new.updated_by!==user.id){state=normalize(p.new.data);render();sync('Actualizado desde otro dispositivo','ok')}}).subscribe(s=>{if(s==='CHANNEL_ERROR'||s==='TIMED_OUT')console.warn('Realtime:',s)})}
-function save(){render();sync('Guardando…');let snapshot=JSON.parse(JSON.stringify(state));queue=queue.then(async()=>{let {error}=await sb.from('app_state').upsert({id:'main',data:snapshot,updated_by:user.id},{onConflict:'id'});if(error)throw error;sync('Guardado en Supabase · datos compartidos','ok')}).catch(e=>{console.error('Error de guardado',e);sync('Error al guardar: '+(e.message||String(e)),'error')})}
-async function enter(){let {data,error}=await sb.from('company_members').select('role').eq('user_id',user.id).maybeSingle();if(error)throw error;if(!data){await sb.auth.signOut();throw Error('Cuenta sin autorización en company_members.')}role=data.role;$('login').classList.add('hidden');$('app').classList.remove('hidden');$('who').textContent=user.email+' · '+role;try{await load()}catch(e){console.error(e);sync('Error al cargar datos: '+(e.message||String(e)),'error')}}
-$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginBtn').disabled=true;say('Comprobando acceso…');try{if(!sb)throw Error('No se ha inicializado la conexión. Recarga la página.');let {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)throw error;user=data.user;await enter()}catch(e){say(e.message==='Invalid login credentials'?'Correo o contraseña incorrectos.':e.message,true)}finally{$('loginBtn').disabled=false}};
-$('logout').onclick=async()=>{if(channel)await sb.removeChannel(channel);await sb.auth.signOut();location.reload()};
-$('if').onsubmit=e=>{e.preventDefault();state.incidents.unshift({id:uid(),date:$('idate').value,site:$('isite').value.trim(),type:$('itype').value,priority:$('ipri').value,staff:$('istaff').value.trim(),facts:$('ifacts').value.trim(),action:$('iaction').value.trim()});e.target.reset();$('idate').value=now();save()};
-function clock(type){if(!$('cstaff').value.trim())return alert('Escribe el empleado');state.clocks.unshift({id:uid(),type,staff:$('cstaff').value.trim(),site:$('csite').value.trim(),note:$('cnote').value.trim(),time:new Date().toISOString()});save()}$('cin').onclick=()=>clock('Entrada');$('cout').onclick=()=>clock('Salida');
-$('rbtn').onclick=()=>{if(!$('rstaff').value.trim())return alert('Escribe el empleado');let b={id:uid(),staff:$('rstaff').value.trim(),site:$('rsite').value.trim(),note:$('rnote').value.trim(),time:new Date().toISOString()};if(!navigator.geolocation)return alert('GPS no disponible');navigator.geolocation.getCurrentPosition(p=>{state.rounds.unshift({...b,lat:p.coords.latitude,lon:p.coords.longitude});save()},()=>alert('No se pudo obtener el GPS. Comprueba los permisos de ubicación.'),{enableHighAccuracy:true,timeout:12000})};
-$('sf').onsubmit=e=>{e.preventDefault();state.sites.unshift({id:uid(),name:$('sname').value.trim(),address:$('saddr').value.trim(),contact:$('scontact').value.trim(),kind:$('skind').value});e.target.reset();save()};
-$('pf').onsubmit=e=>{e.preventDefault();state.staff.unshift({id:uid(),name:$('pname').value.trim(),role:$('prole').value});e.target.reset();save()};
-$('export').onclick=()=>{let u=URL.createObjectURL(new Blob([JSON.stringify(state,null,2)],{type:'application/json'})),a=document.createElement('a');a.href=u;a.download='elite-access-bcn-copia.json';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
-async function start(){if(!window.EABCN_CONFIG?.url||!window.EABCN_CONFIG?.anonKey){say('Falta la configuración de app/config.js',true);return}if(!window.supabase?.createClient){say('No se pudo cargar la biblioteca Supabase. Comprueba internet y recarga.',true);return}sb=window.supabase.createClient(window.EABCN_CONFIG.url,window.EABCN_CONFIG.anonKey);$('idate').value=now();try{let {data,error}=await sb.auth.getSession();if(error)throw error;if(data.session){user=data.session.user;await enter()}}catch(e){say('Error de conexión: '+e.message,true)}}start();
+:root{--gold:#d6b15e;--bg:#0b0c0e;--panel:#17191d;--line:#353941;--muted:#a9adb5}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f5f5f2;font:15px system-ui,sans-serif;padding:14px}
+main{max-width:1000px;margin:auto}
+header{display:flex;align-items:center;gap:12px;padding:12px 0 18px;border-bottom:1px solid var(--line)}
+.logo{border:2px solid var(--gold);color:var(--gold);font-weight:900;padding:12px;border-radius:10px}
+header .grow{flex:1}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px;margin:12px 0}
+.muted{color:var(--muted)}
+input,textarea,select,button{font:inherit;width:100%;padding:12px;border-radius:8px;margin:5px 0}
+input,textarea,select{background:#0e1013;color:white;border:1px solid #484b51}
+button{background:var(--gold);color:#111;border:0;font-weight:750;cursor:pointer}
+.secondary{background:#292d33;color:white}
+.nav{display:flex;gap:6px;overflow-x:auto;margin:12px 0}
+.nav button{width:auto;min-width:max-content;background:#292d33;color:white}
+.nav button.active{background:var(--gold);color:#111}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:8px}
+.stat{font-size:27px;color:var(--gold);font-weight:800}
+label{display:block;font-size:12px;font-weight:bold;margin-top:9px}
+.item{border:1px solid var(--line);border-radius:9px;padding:12px;margin:8px 0;overflow-wrap:anywhere}
+.hidden{display:none!important}
+.error{color:#ff9999}.ok{color:#8be0aa}
+.notice{background:#292515;border:1px solid #66552a;padding:11px;border-radius:9px;color:#f1d991;font-size:12px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+h2{font-size:21px}
+</style>
+</head>
+<body>
+<main>
+<div id="login">
+<header>
+<div class="logo">EA</div>
+<div><b>ELITE ACCESS BCN</b><div class="muted">Centro privado de operaciones</div></div>
+</header>
+<section class="card">
+<h2>Iniciar sesión</h2>
+<p class="muted">Acceso exclusivo para cuentas autorizadas.</p>
+<form id="loginForm">
+<label>Correo electrónico</label>
+<input id="email" type="email" autocomplete="username" required>
+<label>Contraseña</label>
+<input id="password" type="password" autocomplete="current-password" required>
+<button id="loginBtn">Entrar</button>
+</form>
+<p id="loginMsg" class="muted"></p>
+</section>
+</div>
+
+<div id="app" class="hidden">
+<header>
+<div class="logo">EA</div>
+<div class="grow"><b>ELITE ACCESS BCN</b><div class="muted">Centro de operaciones</div></div>
+<button id="logout" class="secondary" style="width:auto">Salir</button>
+</header>
+<p id="who" class="muted"></p>
+<p id="status" class="muted">Conectando…</p>
+
+<nav class="nav">
+<button class="active" data-tab="home">Inicio</button>
+<button data-tab="daily">Parte diario</button>
+<button data-tab="inc">Incidencias</button>
+<button data-tab="clock">Fichaje</button>
+<button data-tab="round">Rondas GPS</button>
+<button data-tab="sites" data-admin>Servicios</button>
+<button data-tab="staff" data-admin>Personal</button>
+<button data-tab="reports" data-admin>Informes</button>
+</nav>
+
+<section id="home" class="tab">
+<div class="card">
+<p style="color:var(--gold)">CENTRO DE OPERACIONES</p>
+<h2>Control profesional. Servicio excelente.</h2>
+<p class="muted">Registra tu actividad de forma clara y ordenada.</p>
+</div>
+<div class="grid">
+<div class="card">Partes diarios<div id="nDaily" class="stat">0</div></div>
+<div class="card">Incidencias<div id="nInc" class="stat">0</div></div>
+<div class="card">Fichajes<div id="nClock" class="stat">0</div></div>
+<div class="card">Rondas GPS<div id="nRound" class="stat">0</div></div>
+<div class="card" data-admin>Servicios<div id="nSites" class="stat">0</div></div>
+<div class="card" data-admin>Personal<div id="nStaff" class="stat">0</div></div>
+</div>
+<div class="notice">El GPS solo se solicita al registrar una ronda. No hay seguimiento en segundo plano.</div>
+</section>
+
+<section id="daily" class="tab hidden">
+<h2>Parte diario de servicio</h2>
+<form id="dailyForm" class="card">
+<label>Servicio</label><select id="dsite" required></select>
+<label>Fecha del parte</label><input id="ddate" type="date" required>
+<label>Hora de inicio</label><input id="dstart" type="time" required>
+<label>Hora de finalización</label><input id="dend" type="time">
+<label>Resumen del servicio</label><textarea id="dsummary" required rows="4"></textarea>
+<label>Observaciones y entrega de turno</label><textarea id="dnotes" rows="3"></textarea>
+<button>Guardar parte diario</button>
+</form>
+<div id="dl"></div>
+</section>
+
+<section id="inc" class="tab hidden">
+<h2>Parte de incidencia</h2>
+<form id="incidentForm" class="card">
+<label>Servicio</label><select id="isite" required></select>
+<label>Fecha y hora</label><input id="idate" type="datetime-local" required>
+<label>Tipo de incidencia</label>
+<select id="itype"><option>Acceso denegado</option><option>Conflicto verbal</option><option>Alteración del orden</option><option>Emergencia médica</option><option>Daño material</option><option>Riesgo o anomalía</option><option>Entrega de turno</option><option>Otro</option></select>
+<label>Prioridad</label><select id="ipri"><option>Normal</option><option>Alta</option><option>Urgente</option></select>
+<label>Descripción objetiva de los hechos</label><textarea id="ifacts" required rows="4"></textarea>
+<label>Actuación realizada</label><textarea id="iaction" rows="3"></textarea>
+<button>Guardar incidencia</button>
+</form>
+<div id="il"></div>
+</section>
+
+<section id="clock" class="tab hidden">
+<h2>Fichaje de jornada</h2>
+<form id="clockForm" class="card">
+<label>Servicio</label><select id="csite" required></select>
+<label>Nombre del empleado</label><input id="cstaff" required>
+<label>Observaciones</label><input id="cnote">
+<div class="two">
+<button type="button" id="cin">Registrar entrada</button>
+<button type="button" id="cout" class="secondary">Registrar salida</button>
+</div>
+</form>
+<div id="cl"></div>
+</section>
+
+<section id="round" class="tab hidden">
+<h2>Rondas GPS</h2>
+<div class="card">
+<label>Servicio</label><select id="rsite" required></select>
+<label>Nombre del empleado</label><input id="rstaff" required>
+<label>Punto de control y observaciones</label><input id="rnote">
+<button id="rbtn" type="button">Registrar punto GPS</button>
+<p class="muted">Permite la ubicación cuando el navegador la solicite.</p>
+</div>
+<div id="rl"></div>
+</section>
+
+<section id="sites" class="tab hidden">
+<h2>Gestión de servicios</h2>
+<form id="siteForm" class="card">
+<label>Nombre del servicio</label><input id="sname" required>
+<label>Dirección</label><input id="saddr">
+<label>Contacto de trabajo</label><input id="scontact">
+<label>Tipo de servicio</label>
+<select id="skind"><option>Control de acceso</option><option>Servicios auxiliares</option><option>Conserjería / recepción</option><option>Rondas</option><option>Otro</option></select>
+<button>Guardar servicio</button>
+</form>
+<div id="sl"></div>
+</section>
+
+<section id="staff" class="tab hidden">
+<h2>Gestión de personal</h2>
+<form id="staffForm" class="card">
+<label>Nombre y apellidos</label><input id="pname" required>
+<label>Puesto</label><select id="prole"><option>Auxiliar de servicios</option><option>Controlador de acceso habilitado</option><option>Coordinación</option><option>Administración</option><option>Vigilante de seguridad habilitado</option></select>
+<button>Añadir ficha de personal</button>
+</form>
+<div id="pl"></div>
+</section>
+
+<section id="reports" class="tab hidden">
+<h2>Informes de empresa</h2>
+<div class="card">
+<p>Exporta los registros que tu cuenta tiene permiso para consultar.</p>
+<button id="export">Descargar copia JSON</button>
+</div>
+</section>
+<p class="muted">ELITE ACCESS BCN · Datos sujetos a las políticas de acceso de la base de datos.</p>
+</div>
+</main>
+
+<script src="./config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(()=> {
+'use strict';
+const $=id=>document.getElementById(id);
+let sb,user,role,services=[],staff=[];
+const rows={daily:[],incidents:[],clocks:[],rounds:[],sites:[],staff:[]};
+const tables={daily:'eabcn_daily_reports',incidents:'eabcn_incidents',clocks:'eabcn_clocks',rounds:'eabcn_rounds',sites:'eabcn_sites',staff:'eabcn_staff'};
+const admin=()=>role==='admin';
+const status=(s,ok=false)=>{$('status').textContent=s;$('status').className=ok?'ok':'muted'};
+const msg=(s,err=false)=>{$('loginMsg').textContent=s;$('loginMsg').className=err?'error':'muted'};
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dateInput=()=>{let d=new Date();return new Date(d-d.getTimezoneOffset()*60000).toISOString().slice(0,16)};
+const today=()=>dateInput().slice(0,10);
+const fmt=s=>{try{return new Date(s).toLocaleString('es-ES')}catch{return String(s||'')}};
+function tab(id){document.querySelectorAll('.tab').forEach(x=>x.classList.add('hidden'));$(id).classList.remove('hidden');document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x.dataset.tab===id))}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{if(b.hasAttribute('data-admin')&&!admin())return;tab(b.dataset.tab)});
+function item(title,sub,body=''){return '<div class="item"><b>'+esc(title)+'</b><div class="muted">'+esc(sub)+'</div>'+(body?'<p>'+esc(body)+'</p>':'')+'</div>'}
+function fillServices(){const opts='<option value="">Selecciona un servicio</option>'+services.map(s=>'<option value="'+esc(s.id)+'">'+esc(s.name)+'</option>').join('');['dsite','isite','csite','rsite'].forEach(id=>$(id).innerHTML=opts)}
+function render(){
+$('nDaily').textContent=rows.daily.length;$('nInc').textContent=rows.incidents.length;$('nClock').textContent=rows.clocks.length;$('nRound').textContent=rows.rounds.length;$('nSites').textContent=rows.sites.length;$('nStaff').textContent=rows.staff.length;
+$('dl').innerHTML=rows.daily.map(x=>item('Parte diario · '+x.service_name,x.report_date+' · '+x.start_time+'–'+(x.end_time||'—'),x.summary+' '+(x.notes||''))).join('')||'<p class="muted">Sin partes diarios.</p>';
+$('il').innerHTML=rows.incidents.map(x=>item(x.incident_type+' · '+x.service,fmt(x.incident_at)+' · '+x.employee_name+' · '+x.priority,x.facts+' '+(x.action_taken||''))).join('')||'<p class="muted">Sin incidencias.</p>';
+$('cl').innerHTML=rows.clocks.map(x=>item(x.event_type+' · '+x.employee_name,fmt(x.event_at)+' · '+x.service,x.note)).join('')||'<p class="muted">Sin fichajes.</p>';
+$('rl').innerHTML=rows.rounds.map(x=>item(x.employee_name+' · '+x.service,fmt(x.event_at)+' · '+x.note,x.latitude!=null?'GPS: '+Number(x.latitude).toFixed(5)+', '+Number(x.longitude).toFixed(5):'')).join('')||'<p class="muted">Sin rondas.</p>';
+$('sl').innerHTML=rows.sites.map(x=>item(x.name,x.kind+' · '+x.address+' · '+x.contact)).join('')||'<p class="muted">Sin servicios.</p>';
+$('pl').innerHTML=rows.staff.map(x=>item(x.name,x.job_role)).join('')||'<p class="muted">Sin personal.</p>';
+fillServices();
+}
+async function loadOne(key,order){let q=sb.from(tables[key]).select('*').order(order,{ascending:false}).limit(500);const {data,error}=await q;if(error)throw error;rows[key]=data||[]}
+async function load(){
+status('Cargando registros…');
+await Promise.all([loadOne('daily','report_date'),loadOne('incidents','incident_at'),loadOne('clocks','event_at'),loadOne('rounds','event_at')]);
+if(admin())await Promise.all([loadOne('sites','created_at'),loadOne('staff','created_at')]);
+services=rows.sites;
+render();status('Datos cargados correctamente',true);
+}
+async function insert(key,record){const {error}=await sb.from(tables[key]).insert({...record,created_by:user.id});if(error)throw error;await load()}
+function selectedService(id){const s=services.find(x=>x.id===$(id).value);if(!s)throw Error('Selecciona un servicio válido.');return s}
+async function enter(){
+const {data:m,error}=await sb.from('company_members').select('role').eq('user_id',user.id).maybeSingle();
+if(error)throw error;
+if(!m||!['admin','employee'].includes(m.role)){await sb.auth.signOut();throw Error('Cuenta sin autorización. Pide al administrador que autorice tu usuario.')}
+role=m.role;
+$('login').classList.add('hidden');$('app').classList.remove('hidden');
+$('who').textContent=user.email+' · '+(admin()?'ADMINISTRADOR':'EMPLEADO');
+document.querySelectorAll('[data-admin]').forEach(el=>el.classList.toggle('hidden',!admin()));
+$('ddate').value=today();$('idate').value=dateInput();
+await load();
+}
+$('loginForm').onsubmit=async e=>{e.preventDefault();$('loginBtn').disabled=true;msg('Comprobando acceso…');try{if(!sb)throw Error('No se ha cargado la configuración de Supabase.');const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});if(error)throw error;user=data.user;await enter()}catch(e){msg(e.message,true)}finally{$('loginBtn').disabled=false}};
+$('logout').onclick=async()=>{await sb.auth.signOut();location.reload()};
+$('dailyForm').onsubmit=async e=>{e.preventDefault();try{const s=selectedService('dsite');await insert('daily',{service_id:s.id,service_name:s.name,report_date:$('ddate').value,start_time:$('dstart').value,end_time:$('dend').value||null,summary:$('dsummary').value.trim(),notes:$('dnotes').value.trim(),employee_name:user.email});e.target.reset();$('ddate').value=today();alert('Parte diario guardado.')}catch(x){alert('No se pudo guardar el parte: '+x.message)}};
+$('incidentForm').onsubmit=async e=>{e.preventDefault();try{const s=selectedService('isite');await insert('incidents',{incident_at:new Date($('idate').value).toISOString(),service:s.name,incident_type:$('itype').value,priority:$('ipri').value,employee_name:user.email,facts:$('ifacts').value.trim(),action_taken:$('iaction').value.trim()});e.target.reset();$('idate').value=dateInput();alert('Incidencia guardada.')}catch(x){alert('No se pudo guardar la incidencia: '+x.message)}};
+async function clock(kind){try{const s=selectedService('csite');const name=$('cstaff').value.trim();if(!name)throw Error('Escribe el nombre del empleado.');await insert('clocks',{event_type:kind,employee_name:name,service:s.name,note:$('cnote').value.trim()});alert('Fichaje de '+kind.toLowerCase()+' guardado.')}catch(x){alert('No se pudo fichar: '+x.message)}}
+$('cin').onclick=()=>clock('Entrada');$('cout').onclick=()=>clock('Salida');
+$('rbtn').onclick=()=>{try{const s=selectedService('rsite');const name=$('rstaff').value.trim();if(!name)throw Error('Escribe el nombre del empleado.');if(!navigator.geolocation)throw Error('Este navegador no permite GPS.');navigator.geolocation.getCurrentPosition(async p=>{try{await insert('rounds',{employee_name:name,service:s.name,note:$('rnote').value.trim(),latitude:p.coords.latitude,longitude:p.coords.longitude});alert('Punto GPS guardado.')}catch(x){alert('No se pudo guardar la ronda: '+x.message)}},()=>alert('No se obtuvo ubicación. Comprueba el permiso de GPS.'),{enableHighAccuracy:true,timeout:15000})}catch(x){alert(x.message)}};
+$('siteForm').onsubmit=async e=>{e.preventDefault();if(!admin())return alert('Solo el administrador puede gestionar servicios.');try{await insert('sites',{name:$('sname').value.trim(),address:$('saddr').value.trim(),contact:$('scontact').value.trim(),kind:$('skind').value});e.target.reset();alert('Servicio guardado.')}catch(x){alert('Error al guardar servicio: '+x.message)}};
+$('staffForm').onsubmit=async e=>{e.preventDefault();if(!admin())return alert('Solo el administrador puede gestionar personal.');try{await insert('staff',{name:$('pname').value.trim(),job_role:$('prole').value});e.target.reset();alert('Ficha de personal guardada.')}catch(x){alert('Error al guardar personal: '+x.message)}};
+$('export').onclick=()=>{if(!admin())return alert('Solo el administrador puede exportar informes generales.');const blob=new Blob([JSON.stringify({created_at:new Date().toISOString(),daily:rows.daily,incidents:rows.incidents,clocks:rows.clocks,rounds:rows.rounds,sites:rows.sites,staff:rows.staff},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='elite-access-bcn-informe.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
+async function start(){
+if(!window.EABCN_CONFIG?.url||!window.EABCN_CONFIG?.anonKey){msg('No se encuentra la configuración de app/config.js.',true);return}
+if(!window.supabase?.createClient){msg('No se pudo cargar Supabase. Comprueba internet.',true);return}
+sb=window.supabase.createClient(window.EABCN_CONFIG.url,window.EABCN_CONFIG.anonKey);
+try{const {data,error}=await sb.auth.getSession();if(error)throw error;if(data.session){user=data.session.user;await enter()}}catch(e){msg('Error de conexión: '+e.message,true)}
+}
+start();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
