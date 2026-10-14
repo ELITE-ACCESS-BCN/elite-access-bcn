@@ -1,4 +1,4 @@
-const CACHE='elite-access-bcn-v6';
+const CACHE='elite-access-bcn-v7';
 const FILES=['./','./index.html','./manifest.webmanifest','./config.js'];
 self.addEventListener('install',event=>{
   self.skipWaiting();
